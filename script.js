@@ -123,7 +123,7 @@ function getPasswordOptions() {
   passwordOptions.includeSpecial = includeSpecial;
 
   // Return the password options object
-  return passwordOptions;  
+  return passwordOptions;
 }
 
 // Function for getting a random element from an array
@@ -143,17 +143,15 @@ function generatePassword() {
   let characterTypes = [];
 
   // Push the appropriate character arrays to the characterTypes array based on the user's password options
-  if (passwordOptions.includeUppercase) {
-    characterTypes.push(upperCasedCharacters);
-  }
-  if (passwordOptions.includeLowercase) {
-    characterTypes.push(lowerCasedCharacters);
-  }
-  if (passwordOptions.includeNumbers) {
-    characterTypes.push(numericCharacters);
-  }
-  if (passwordOptions.includeSpecial) {
-    characterTypes.push(specialCharacters);
+  if (Object.values(passwordOptions).some(Boolean)) {
+    characterTypes.push(
+      ...[
+        passwordOptions.includeUppercase && upperCasedCharacters,
+        passwordOptions.includeLowercase && lowerCasedCharacters,
+        passwordOptions.includeNumbers && numericCharacters,
+        passwordOptions.includeSpecial && specialCharacters,
+      ].filter(Boolean)
+    );
   }
 
   // Initializes an empty array to store the password
