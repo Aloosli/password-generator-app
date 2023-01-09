@@ -16,3 +16,8 @@ When the "Generate Password" button is clicked, it will trigger the generatePass
 Once the password options have been determined, the generatePassword function will create an array of character types to include in the password. It will then generate a password by randomly selecting one character from each of the selected character types and joining them together. The generated password will be displayed on the screen.
 
 The getRandom function is used to select a random element from an array.
+
+## Deployment
+
+![app_screen_shot](../assets/05-javascript-challenge-demo.png)
+https://aloosli.github.io/password-generator-app/

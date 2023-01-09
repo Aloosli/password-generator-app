@@ -87,16 +87,20 @@ const upperCasedCharacters = [
   "Y",
   "Z",
 ];
-
+// Function to prompt user for password options
 function getPasswordOptions() {
   // Initialize an object to store the password options
   let passwordOptions = {};
+
   // Prompt the user for the password length
+
   let passwordLength;
+
   do {
     passwordLength = parseInt(
       prompt("How many characters would you like to use between 10 and 64?")
     );
+
     if (isNaN(passwordLength) || passwordLength < 10 || passwordLength > 64) {
       alert("Please enter a valid number between 10 and 64.");
     }
@@ -136,8 +140,8 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-   // Calls the getPasswordOptions function
-   let passwordOptions = getPasswordOptions();
+  // Calls the getPasswordOptions function
+  let passwordOptions = getPasswordOptions();
   // Initialize an array to store the character types to include in the password
   const characterTypes = [];
 
