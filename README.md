@@ -1,6 +1,7 @@
 # Password-Generator
 
 This is a password generator that allows the user to specify the length and character types of their desired password. It includes four character types: special characters, numeric characters, lowercase characters, and uppercase characters.
+![app_screen_shot](../assets/05-javascript-challenge-demo.png)
 
 ## Getting Started
 
@@ -19,5 +20,6 @@ The getRandom function is used to select a random element from an array.
 
 ## Deployment
 
-![app_screen_shot](../assets/05-javascript-challenge-demo.png)
+
+
 https://aloosli.github.io/password-generator-app/
