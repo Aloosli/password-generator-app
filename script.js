@@ -88,7 +88,6 @@ const upperCasedCharacters = [
   "Z",
 ];
 
-// Function to prompt user for password options
 function getPasswordOptions() {
   // Initialize an object to store the password options
   let passwordOptions = {};
@@ -103,25 +102,26 @@ function getPasswordOptions() {
     }
   } while (isNaN(passwordLength) || passwordLength < 10 || passwordLength > 64);
   passwordOptions.length = passwordLength;
+
   // Prompt the user for the character types to include
-  let includeUppercase = confirm(
+  passwordOptions.includeUppercase = confirm(
     "Would you like to include uppercase letters in the password?"
   );
-  passwordOptions.includeUppercase = includeUppercase;
-  let includeLowercase = confirm(
+  passwordOptions.includeLowercase = confirm(
     "Would you like to include lowercase letters in the password?"
   );
-  passwordOptions.includeLowercase = includeLowercase;
-  let includeNumbers = confirm(
+  passwordOptions.includeNumbers = confirm(
     "Would you like to include numbers in the password?"
   );
-  passwordOptions.includeNumbers = includeNumbers;
-
-  let includeSpecial = confirm(
+  passwordOptions.includeSpecial = confirm(
     "Would you like to include special characters in the password?"
   );
-  passwordOptions.includeSpecial = includeSpecial;
 
+  // If the user did not select at least one character type, alert the user and call the getPasswordOptions function again
+  if (!Object.values(passwordOptions).some(Boolean)) {
+    alert("Please select at least one character type.");
+    passwordOptions = getPasswordOptions();
+  }
   // Return the password options object
   return passwordOptions;
 }
@@ -136,35 +136,42 @@ function getRandom(arr) {
 
 // Function to generate password with user input
 function generatePassword() {
-  // Calls the getPasswordOptions function
-  let passwordOptions = getPasswordOptions();
-
+   // Calls the getPasswordOptions function
+   let passwordOptions = getPasswordOptions();
   // Initialize an array to store the character types to include in the password
-  let characterTypes = [];
+  const characterTypes = [];
 
-  // Push the appropriate character arrays to the characterTypes array based on the user's password options
-  if (Object.values(passwordOptions).some(Boolean)) {
-    characterTypes.push(
-      ...[
-        passwordOptions.includeUppercase && upperCasedCharacters,
-        passwordOptions.includeLowercase && lowerCasedCharacters,
-        passwordOptions.includeNumbers && numericCharacters,
-        passwordOptions.includeSpecial && specialCharacters,
-      ].filter(Boolean)
-    );
+  // Prompt the user for their password options until at least one character type has been selected
+  if (passwordOptions.includeUppercase) {
+    characterTypes.push(upperCasedCharacters);
+  }
+  if (passwordOptions.includeLowercase) {
+    characterTypes.push(lowerCasedCharacters);
+  }
+  if (passwordOptions.includeNumbers) {
+    characterTypes.push(numericCharacters);
+  }
+  if (passwordOptions.includeSpecial) {
+    characterTypes.push(specialCharacters);
+  }
+
+  // If the characterTypes array is empty, alert the user to select at least one character type and set passwordOptions to the value returned by the getPasswordOptions function
+  if (!characterTypes.length) {
+    alert("Please select at least one character type.");
+    passwordOptions = getPasswordOptions();
   }
 
   // Initializes an empty array to store the password
   let password = [];
+
   // Generate a random password of the specified length
   for (let i = 0; i < passwordOptions.length; i++) {
     // Select a random character type array
     let characterType = getRandom(characterTypes);
-    // Select a random character from the selected character type array
-    let char = getRandom(characterType);
-    // Add the character to the password
-    password.push(char);
+    // Push a random character from the selected array to the password
+    password.push(getRandom(characterType));
   }
+
   // Return the generated password
   return password.join("");
 }
