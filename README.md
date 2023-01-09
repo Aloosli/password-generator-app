@@ -1,7 +1,7 @@
 # Password-Generator
 
 This is a password generator that allows the user to specify the length and character types of their desired password. It includes four character types: special characters, numeric characters, lowercase characters, and uppercase characters.
-![app_screen_shot](../assets/05-javascript-challenge-demo.png)
+![app_screen_shot](pwdgen.png)
 
 ## Getting Started
 
